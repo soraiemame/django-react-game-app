@@ -15,8 +15,8 @@ export default class App extends React.Component {
             <Router>
                 <Switch>
                     <Route exact path="/" component={Home} />
-                    <Route path="/join" componenet={Join} />
-                    <Route path="/create" componenet={Create} />
+                    <Route path="/join" component={Join} />
+                    <Route path="/create" component={Create} />
                 </Switch>
             </Router>
         );
