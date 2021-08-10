@@ -7,7 +7,7 @@ import {
     Button
 } from "@material-ui/core";
 import axios from "../utils/axios";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 
 export default class Create extends React.Component {
@@ -49,6 +49,7 @@ export default class Create extends React.Component {
         if(this.state.code) return <Redirect to={`/word-wolf/room/${this.state.code}`} />
         else return (
             <div>
+                <Link to="/">Home</Link>
                 <h1>Create</h1>
                 <FormControl style={{ minWidth: 100,paddingRight: 20 }}>
                     <InputLabel id="player">Player</InputLabel>

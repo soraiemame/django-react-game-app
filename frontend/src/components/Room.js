@@ -14,6 +14,8 @@ export default class Room extends React.Component {
             game_ended: false,
             my_theme: null,
             is_users_room: null,
+            wolf_theme: null,
+            others_theme: null,
         };
     }
     update = async () => {
@@ -23,8 +25,6 @@ export default class Room extends React.Component {
             const users_room = await axios.get("/api/word-wolf/user-in-room");
             const room_data = room.data;
             const theme_data = theme.data;
-            // console.log(room_data);
-            // console.log(theme_data);
             this.setState({
                 wolf_num: room_data.wolf_num,
                 player_num: room_data.player_num,
@@ -33,6 +33,9 @@ export default class Room extends React.Component {
                 my_theme: theme_data.theme,
                 is_users_room: users_room.data.code === this.code,
             });
+            if(room_data.wolf_theme !== undefined) {
+                this.setState({ wolf_theme: room_data.wolf_theme, others_theme: room_data.others_theme });
+            }
         }
         catch (error) {
             this.setState({ is_users_room: false });
@@ -51,26 +54,44 @@ export default class Room extends React.Component {
     handle_end = async () => {
         const res = await axios.get("/api/word-wolf/end");
     }
+    render_before_start = () => {
+        return (
+            <div>
+                <h1>Room: {this.code}</h1>
+                <p>Waiting for people...  {this.state.cur_num} / {this.state.player_num}</p>
+                <Button onClick={this.handle_leave} variant="contained" color="primary">Leave</Button>
+            </div>
+        );
+    }
+    render_during_game = () => {
+        return (
+            <div>
+                <h1>Room: {this.code}</h1>
+                <h2>Find the wolf!!</h2>
+                <p>Your theme: {this.state.my_theme}</p>
+                <Button onClick={this.handle_end} variant="contained" color="secondary">End</Button>
+            </div>
+        );
+    }
+    render_after_game = () => {
+        return (
+            <div>
+                <h1>Room: {this.code}</h1>
+                <h2>Game Ended!!</h2>
+                <p>Your theme: {this.state.my_theme}</p>
+                <p>Wolf's theme: {this.state.wolf_theme}</p>
+                <p>Others' theme: {this.state.others_theme}</p>
+                <Button onClick={this.handle_leave} variant="contained" color="primary">Leave</Button>
+            </div>
+        );
+    }
     render() {
         if(this.state.is_users_room === true) {
-            return (
-                <div>
-                    <h1>Room: {this.code}</h1>
-                    <p>My theme: {this.state.my_theme}</p>
-                    <p>player_num: {this.state.player_num}</p>
-                    <p>wolf_num: {this.state.wolf_num}</p>
-                    <p>cur_num: {this.state.cur_num}</p>
-                    <p>game_ended: {this.state.game_ended ? "true" : "false"}</p>
-                    {
-                        this.state.player_num !== this.state.cur_num || this.state.game_ended ?
-                        <Button onClick={this.handle_leave} variant="contained" color="primary">Leave</Button> :
-                        <Button onClick={this.handle_end} variant="contained" color="secondary">End</Button>
-                    }
-                </div>
-            );
+            if(this.state.game_ended) return this.render_after_game();
+            else if(this.state.player_num === this.state.cur_num) return this.render_during_game();
+            else return this.render_before_start();
         }
         else if(this.state.is_users_room === false) {
-            alert(`You can not Join room ${this.code}.`);
             return (
                 <Redirect to="/" />
             );
