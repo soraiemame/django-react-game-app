@@ -19,4 +19,7 @@ class WordWolfRoom(models.Model):
     wolf_num = models.IntegerField(default=0)
     wolf_theme = models.CharField(max_length=50, default="")
     others_theme = models.CharField(max_length=50, default="")
+    wolf = models.IntegerField(default=0)  # wolf bit
+    cur_num = models.IntegerField(default=0)
+    game_ended = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
