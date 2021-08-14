@@ -51,6 +51,7 @@ export default class Create extends React.Component {
             <div>
                 <Link to="/">Home</Link>
                 <h1>Create</h1>
+                <p>Select the number of players and wolfs.</p>
                 <FormControl style={{ minWidth: 100,paddingRight: 20 }}>
                     <InputLabel id="player">Player</InputLabel>
                     <Select onChange={this.handle_player_change} value={this.state.player}>

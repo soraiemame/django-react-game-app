@@ -33,7 +33,6 @@ export default class App extends React.Component {
         return (
             <Router>
                 <Switch>
-                    {/* { this.state.code !== null && <Redirect to={`/${this.state.game}/room/${this.state.code}`} /> } */}
                     <Route exact path="/" render={
                         () => this.state.code === null ? <Home /> : <Redirect to={`/${this.state.game}/room/${this.state.code}`} />
                     } />
