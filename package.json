@@ -4,7 +4,8 @@
     "main": "index.js",
     "license": "MIT",
     "scripts": {
-        "dev": "webpack --config webpack.config.js --mode development --watch"
+        "dev": "webpack --config webpack.config.js --mode development --watch",
+        "build": "webpack --config webpack.config.js --mode production"
     },
     "dependencies": {
         "@babel/runtime": "^7.14.8",

@@ -21,6 +21,9 @@ module.exports = {
             }
         ]
     },
+    optimization: {
+        minimize: true,
+    },
     output: {
         path: __dirname + "/frontend/static/frontend",
         filename: "main.js"
