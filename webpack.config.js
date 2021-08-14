@@ -2,8 +2,7 @@ const path = require("path");
 const webpack = require("webpack");
 
 module.exports = {
-    // entry: "./frontend/src/index.js",
-    exntry: "./src/index.js",
+    entry: "./frontend/src/index.js",
     module: {
         rules: [
             {
@@ -26,8 +25,7 @@ module.exports = {
         minimize: true,
     },
     output: {
-        // path: __dirname + "/frontend/static/frontend",
-        path: __dirname + "/static/frontend",
+        path: __dirname + "/frontend/static/frontend",
         filename: "main.js"
     },
 };
