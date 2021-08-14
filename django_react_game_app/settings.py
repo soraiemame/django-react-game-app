@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'soraie-game-app.herokuapp.com']
 
 # Application definition
 
@@ -78,7 +78,7 @@ DATABASES = {
         'NAME': 'name',
         'USER': 'user',
         'PASSWORD': '',
-        'HOST': 'host',
+        'HOST': 'soraie-game-app.herokuapp.com',
         'PORT': '',
     }
 }
